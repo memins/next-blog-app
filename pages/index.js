@@ -12,7 +12,7 @@ export default function Home() {
           Next.js / Gatsby, accompanied by a serverless architecture.
         </p>
       </div>
-      <div className="mt-10">
+      <div className="site-xl-container mt-10">
         <img src="dimitry-anikin-GMeYYsty8bM-unsplash.jpg" alt="" />
       </div>
     </div>
