@@ -1,8 +1,10 @@
 export default function Home() {
   return (
     <div className="site-container">
-      <div className="space-y-4">
-        <h1 className="text-2xl font-bold">Hi, my name is Emin!</h1>
+      <div className="space-y-4 dark:text-gray-400">
+        <h1 className="text-2xl font-bold dark:text-highlight">
+          Hi, my name is Emin!
+        </h1>
         <p>
           I'm a Web Developer based in beautiful Vienna, Austria. As a
           freelancer I'm working for clients around the world.

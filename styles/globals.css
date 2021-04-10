@@ -11,3 +11,15 @@
     @apply max-w-4xl mx-auto
   }
 }
+
+@layer components {
+  html {
+    @apply bg-white text-gray-600 antialiased
+    dark:bg-gray-900 dark:text-gray-400;
+  }
+
+  .text-highlight {
+    @apply text-gray-900
+    dark:text-gray-50;
+  }
+}

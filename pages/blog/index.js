@@ -9,13 +9,13 @@ function Index({ posts }) {
         {posts.map((post) => {
           return (
             <article key={post.url}>
-              <h2 className="text-xl font-bold">
+              <h2 className="text-xl font-bold dark:text-highlight">
                 <Link href={post.url}>
                   <a>{post.frontMatter.title}</a>
                 </Link>
               </h2>
-              <p>{post.frontMatter.excerpt}</p>
-              <div className="text-gray-400">
+              <p className="dark:text-gray-400">{post.frontMatter.excerpt}</p>
+              <div className="text-gray-400 dark:text-gray-600">
                 <span>{post.frontMatter.date}</span>
               </div>
             </article>
