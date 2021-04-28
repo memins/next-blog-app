@@ -10,6 +10,9 @@ export default function Header() {
         <Link href="/blog">
           <a>Blog</a>
         </Link>
+        <Link href="/contact">
+          <a>Contact</a>
+        </Link>
       </nav>
     </header>
   )
