@@ -66,7 +66,7 @@ export default function Post({ post }) {
                 Send
               </button>
               <img src={user.picture} width={30} className="rounded-full" />
-              <span>{user.name}</span>
+              <span className="dark:text-gray-400">{user.name}</span>
               <button
                 typeof="button"
                 onClick={() =>
