@@ -3,17 +3,29 @@ import { useHydrate } from 'next-mdx/client'
 import { mdxComponents } from '../../components/mdx-components'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect, useState } from 'react'
+import Form from '../../components/form'
+import Comment from '../../components/comments'
+import { DateTime } from 'luxon'
 
 export default function Post({ post }) {
-  const {
-    loginWithRedirect,
-    logout,
-    isAuthenticated,
-    user,
-    getAccessTokenSilently
-  } = useAuth0()
+  const { getAccessTokenSilently } = useAuth0()
   const [text, setText] = useState('')
   const [url, setUrl] = useState(null)
+  const [comments, setComments] = useState([])
+
+  const fetchComment = async () => {
+    const query = new URLSearchParams({ url })
+    const newURL = `/api/comment?${query.toString()}`
+    const response = await fetch(newURL, {
+      method: 'GET'
+    })
+    const data = await repsonse.json()
+    setComments(data)
+  }
+
+  useEffect(() => {
+    if (!url) return fetchComment()
+  }, [URL])
 
   useEffect(() => {
     const url = window.location.origin + window.location.pathname
@@ -37,7 +49,8 @@ export default function Post({ post }) {
       }
     })
 
-    const data = await repsonse.json()
+    fetchComment()
+    setText('')
   }
 
   return (
@@ -52,41 +65,8 @@ export default function Post({ post }) {
         <div className="prose dark:text-gray-400">{content}</div>
       </article>
 
-      <form className="mt-10" onSubmit={onSubmit}>
-        <textarea
-          rows="2"
-          className="border border-gray-300 rounded w-full block px-2 py-1"
-          onChange={(e) => setText(e.target.value)}
-        />
-
-        <div className="mt-4">
-          {isAuthenticated ? (
-            <div className="flex items-center space-x-2">
-              <button className="bg-blue-600 text-white px-2 py-1 rounded">
-                Send
-              </button>
-              <img src={user.picture} width={30} className="rounded-full" />
-              <span className="dark:text-gray-400">{user.name}</span>
-              <button
-                typeof="button"
-                onClick={() =>
-                  logout({ returnTo: process.env.NEXT_PUBLIC_URL + '/blog' })
-                }
-              >
-                x
-              </button>
-            </div>
-          ) : (
-            <button
-              className="bg-blue-600 text-white px-2 py-1 rounded"
-              typeof="button"
-              onClick={() => loginWithRedirect()}
-            >
-              Login
-            </button>
-          )}
-        </div>
-      </form>
+      <Form onSubmit={onSubmit} setText={setText} text={text} />
+      <Comment comments={comments} />
     </div>
   )
 }
